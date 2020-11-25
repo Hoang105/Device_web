@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-sm-6 record-paging">
+        <div class="record-paging-lable">Số bản ghi:</div>
+        <div class="option-style">
+            <select class="select" (change)="ChangePage($event)" (click)="navigate()">
+                <option hidden>{{Page.Size}}</option>
+                <option *ngFor="let opt of options">{{opt}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="Paging">
+            <div class="btn-paging">
+                <div class="">
+                    <button mat-button color="accent" class="btn btn-info" (click)="FirstPage()" (click)="navigate()"><span class="fa fa-angle-left"></span></button>
+                </div>
+                <div>
+                    <button mat-button color="accent" class="btn btn-info" (click)="PreviousPage()" (click)="navigate()"><span class="fa fa-angle-left"></span></button>
+                </div>
+                <div *ngFor="let page of Page.Pages, let i=index">
+                    <button mat-button color="accent" *ngIf="page.show" class="btn btn-info" (click)="pagingIndex(i)" [ngClass]="{'paging-active': page.isActived}"
+                    (click)="navigate()">{{page.id}}</button>
+                </div>
+                <div>
+                    <button mat-button color="accent" class="btn btn-info" (click)="NextPage()" (click)="navigate()"><span class="fa fa-angle-right"></span></button>
+                </div>
+                <div>
+                    <button mat-button color="accent" class="btn btn-info" (click)="LastPage()" (click)="navigate()"><span class="fa fa-angle-left"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

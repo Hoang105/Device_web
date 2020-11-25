@@ -1,0 +1,131 @@
+.notication{
+    background-color: #1dbf00;
+    color: #fff;
+    display: none;
+    width: 300px;
+    border-radius: 5px;
+    margin-left: auto;
+    position: fixed;
+    z-index: 100;
+    margin-top: 10px;
+    margin-left: 55%;
+    padding: 10px;
+    .btn{
+        margin-left: 80px;
+    }
+}
+.box-table{
+    margin-top: 2rem;
+    box-shadow: 5px 10px 8px 10px #888888;
+    background-color: #ffffff;
+    padding: 10px;
+    ul.breadcrumb {
+        padding: 10px 16px;
+        list-style: none;
+    }
+    ul.breadcrumb li {
+        display: inline;
+        font-size: 18px;
+    }
+    ul.breadcrumb li+li:before {
+        padding: 8px;
+        color: black;
+        content: "/\00a0";
+    }
+    ul.breadcrumb li a {
+        color: #0275d8;
+        text-decoration: none;
+    }
+    ul.breadcrumb li a:hover {
+        color: #01447e;
+        text-decoration: none;
+    }
+    .filter-data{
+        margin-bottom: 2rem;
+        display: flex;
+        .filter-all{
+            margin-right: 0.5rem;
+            min-width: 15%;
+        }
+        .btn-search{
+            font-weight: 500;
+            .fa{
+                margin-right: 5px;
+            }
+        }
+    }
+    .warning-notications{
+        background-color: #ffc107;
+        border-radius: 5px;
+        padding: 0.3rem 2rem;
+        margin-bottom: 5px;
+        display: flex;
+        color: #ffffff;
+        .warnig-message{
+            padding: 7px;
+            text-transform: capitalize;
+        }
+        .fix-btn-warning{
+            margin-left: auto;
+        }
+        .btn-warning{
+            color: #fff;
+            margin-right: auto;
+        }
+    }
+    .danger-notications{
+        background-color: #d9534f;
+        border-radius: 5px;
+        padding: 0.3rem 2rem;
+        margin-bottom: 5px;
+        display: flex;
+        color: #ffffff;
+        .danger-message{
+            padding: 7px;
+            text-transform: capitalize;
+        }
+        .fix-btn-danger{
+            margin-left: auto;
+        }
+        .btn-danger{
+            color: #fff;
+            margin-right: auto;
+        }
+    }
+    .table-reponsive{
+        overflow-x: auto;
+        table{
+            width: 100%;
+            th{
+                min-width: 150px;
+                background-color: #135dfc;
+                color: #ffffff;
+                border: 1px solid #f9f9f9;
+                text-align: center;
+            }
+            .th-produce,
+            .th-content{
+                min-width: 250px;
+            }
+            .settings{
+                text-align: left;
+                padding-left: 10px;;
+            }
+            td{
+                overflow: auto;
+                padding: 5px;
+            }
+            tbody:hover{
+                background-color: #c0d6ff;
+            }
+        }
+    }
+    .Paging{
+        margin-top: 1rem;
+    }
+}
+@media (max-width:425px){
+    .filter-data{
+        display: block!important;
+    }
+}

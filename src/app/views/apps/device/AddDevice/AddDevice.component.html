@@ -1,0 +1,128 @@
+<div class="notication" id="notication">
+    <div>
+        <span class="fa fa-check"></span>
+        Lưu dữ liệu thành công
+        <button class="btn btn-danger" (click)="Close()">x</button>
+    </div>
+ </div>
+<div class="box-add">
+    <div>
+        <ul class="breadcrumb">
+            <li><a href="/admin">Trang chủ</a></li>
+            <li><a routerLink="/admin/devices">Quản lý dự án</a></li>
+        </ul>
+    </div>
+    <div>
+        <div class="title-header">
+            Thêm thiết bị
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5">
+            <div>
+                <label for="">Nhập tên thiết bị:</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" [(ngModel)]="device.device_name" placeholder="Nhập tên">
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <label for="">Nhập Model/SN:</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" [(ngModel)]="device.device_model_sn" placeholder="Nhập tên">
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <label for="">Nhập nội dung chi tiết (mô tả lỗi, số phiếu kiểm tra nếu có):</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" [(ngModel)]="device.device_content" placeholder="Nhập tên">
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <label for="">Nhập Địa điểm:</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" [(ngModel)]="device.device_location" placeholder="Nhập tên">
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <label for="">Chọn Dự án:</label>
+            </div>
+            <div>
+                <select name="" id="" class="form-control" (change)="selectOption($event.target.value)">
+                    <option value="{{project_device_name.project_id}}">{{project_device_name.project_name}}</option>
+                    <ng-container *ngFor="let project of projects">
+                        <option value="{{project.project_id}}">{{project.project_name}}</option>
+                    </ng-container>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <label for="">Nhập ngày báo:</label>
+            </div>
+            <div>
+                <input type="datetime-local" class="form-control" [(ngModel)]="device.device_report" placeholder="Nhập tên">
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <label for="">Nhập Trạng thái (quá trình chi tiết):</label>
+            </div>
+            <div>
+                <textarea type="text" rows="5" class="form-control" [(ngModel)]="device.device_status" placeholder="Nhập tên"></textarea>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <label for="">Nhập Thông tin khác:</label>
+            </div>
+            <div>
+                <textarea type="text" class="form-control" rows="5" [(ngModel)]="device.device_other" placeholder="Nhập tên"></textarea>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <label for="">Chọn Nhân sự xử lý/theo dõi:</label>
+            </div>
+            <div>
+                <select name="" id="" class="form-control" (change)="selectOption($event.target.value)">
+                    <option value="{{user_device_name.user_manager_id}}">{{user_device_name.user_manager_name}}</option>
+                    <ng-container *ngFor="let user of users">
+                        <option value="{{user.user_manager_id}}">{{user.user_manager_name}}</option>
+                    </ng-container>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <label for="">Nhập thời hạn bảo hành:</label>
+            </div>
+            <div>
+                <input type="datetime-local" class="form-control" [(ngModel)]="device.device_warranty_period" placeholder="Nhập tên">
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <label for="">Nhập 1. Người báo<br>
+                    2. Người xử lý (trong công ty)<br>
+                    3. Người xử lý (đối tác):</label>
+            </div>
+            <div>
+                <textarea type="text" class="form-control" rows="5" [(ngModel)]="device.device_user_report" placeholder="Nhập tên"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="btn-settings">
+        <div class="col-sm-4">
+            <button class="btn btn-primary" (click)="return()"><span class="fa fa-list"></span>Danh sách</button>
+            <button class="btn btn-success" (click)="submit()"><span class="fa fa-check"></span>Lưu</button>
+        </div>
+    </div>
+</div>

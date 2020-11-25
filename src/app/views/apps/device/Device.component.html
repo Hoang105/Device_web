@@ -1,0 +1,118 @@
+<div class="notication" id="notication">
+    <div>
+        <span class="fa fa-check"></span>
+        Lưu dữ liệu thành công
+        <button class="btn btn-danger" (click)="Close()">x</button>
+    </div>
+ </div>
+<div class="box-table">
+    <div>
+        <ul class="breadcrumb">
+            <li><a href="/admin">Trang chủ</a></li>
+            <li><a routerLink="/admin/devices">Quản lý thiết bị</a></li>
+          </ul>
+    </div>
+    <div class="filter-data">
+        <div class="filter-all">
+            <input type="text" class="form-control" placeholder=" Tìm toàn bộ dữ liệu">
+        </div>
+        <div class="btn-search">
+            <button class="btn btn-success"><span class="fa fa-search"></span>Search</button>
+        </div>
+    </div>
+    <div id="form-warning">
+        <ng-container *ngFor="let e of empList">
+            <div *ngIf="!e.status" class="warning-notications">
+                <div class="warnig-message">
+                    Warning {{e.name}} {{e.message}}
+                </div>
+                <div class="fix-btn-warning">
+                    <button class="btn btn-warning" (click)="TurnOffNoti()">x</button>
+                </div>
+            </div>
+            <div *ngIf="e.status" class="danger-notications">
+                <div class="danger-message">
+                    {{e.message}}
+                </div>
+                <div class="fix-btn-danger">
+                    <button class="btn btn-danger" (click)="TurnOffNoti()">x</button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div>
+        <div class="table-reponsive">
+            <table>
+                <thead>
+                    <ng-container *ngIf="isAdmin">
+                        <th class="settings" style="min-width:150px;">
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="add()"><span class="fa fa-plus"></span></button>
+                        </th>
+                    </ng-container>
+                    <th style="min-width:150px;">Tên thiết bị lỗi</th>
+                    <th style="min-width:150px;">Model/SN</th>
+                    <th style="min-width:250px;">Nội dung chi tiết (mô tả lỗi, số phiếu kiểm tra nếu có)</th>
+                    <th style="min-width:100px;">Địa điểm</th>
+                    <th style="min-width:100px;">Dự án</th>
+                    <th style="min-width:100px;">Ngày báo</th>
+                    <th style="min-width:160px;">Nhân sự xử lý/theo dõi</th>
+                    <th style="min-width:300px;">Trạng thái (quá trình chi tiết)</th>
+                    <th style="min-width:250px;">
+                        1. Người báo<br>
+                        2. Người xử lý (trong công ty)<br>
+                        3. Người xử lý (đối tác)<br>
+                    </th>
+                    <th style="min-width:100px;">Thời hạn bảo hành</th>
+                    <th style="min-width:200px;">Thông tin khác</th>
+                </thead>
+                <ng-container *ngFor="let d of devices| slice:Paging.Size*(Paging.Index-1):Paging.Size*Paging.Index">
+                    <tbody>
+                        <ng-container *ngIf="isAdmin">
+                            <td class="settings">
+                                <button class="btn btn-warning" (click)="edit(d)"><span class="fa fa-pencil-square-o"></span></button>
+                                <button class="btn btn-danger" 
+                                    mwlConfirmationPopover
+                                    [popoverTitle]=""  
+                                    [popoverMessage]="'Bạn có muốn xóa không?'" 
+                                    [confirmText]="'Có'" 
+                                    [cancelText]="'Không'" 
+                                    placement="right" 
+                                    (confirm)="confirmClicked = true;deletebyId(d)"  
+                                    (cancel)="cancelClicked = true" 
+                                    confirmButtonType="danger" 
+                                    cancelButtonType="defang-containert" 
+                                    (click)="confirmClicked = false; cancelClicked = false"><span class="fa fa-trash"></span></button>
+                            </td>
+                        </ng-container>
+                        <td>{{d.device_name}}</td>
+                        <td>{{d.device_model_sn}}</td>
+                        <td>{{d.device_content}}</td>
+                        <td>{{d.device_location}}</td>
+                        <td>
+                            <ng-container *ngFor="let project of projects">
+                                <ng-container *ngIf="d.device_project_id===project.project_id">
+                                    <div class="column-status"><span class="status-unactive"></span>{{project.project_name}}</div>
+                                </ng-container>
+                            </ng-container>
+                        </td>
+                        <td>{{d.device_report| date: 'HH:mm:ss dd-MM-yyyy'}}</td>
+                        <td>
+                            <ng-container *ngFor="let user of users">
+                                <ng-container *ngIf="d.user_manager_id===user.user_manager_id">
+                                    <div class="column-status"><span class="status-unactive"></span>{{user.user_manager_name}}</div>
+                                </ng-container>
+                            </ng-container>
+                        </td>
+                        <td>{{d.device_status}}</td>
+                        <td>{{d.device_user_report}}</td>
+                        <td>{{d.device_warranty_period| date: 'HH:mm:ss dd-MM-yyyy'}}</td>
+                        <td>{{d.device_other}}</td>
+                    </tbody>
+                </ng-container>
+            </table>
+        </div>
+        <div class="Paging">
+            <app-Paging [(Page)]="Paging" [totalData]="count" (onChange)='getDevice()' [linkRoute]="'/admin/devices'"></app-Paging>
+        </div>
+    </div>
+</div>

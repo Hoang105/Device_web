@@ -1,0 +1,72 @@
+<div class="notication" id="notication">
+   <div>
+       <span class="fa fa-check"></span>
+        Xóa dữ liệu thành công
+        <button class="btn btn-danger" (click)="Close()">x</button>
+   </div>
+</div>
+<div class="box-table">
+    <div>
+        <ul class="breadcrumb">
+            <li><a href="/admin">Trang chủ</a></li>
+            <li><a routerLink="/admin/usermanager">Quản lý nhân viên</a></li>
+        </ul>
+    </div>
+    <div>
+        <div class="table-reponsive">
+            <table>
+                <thead>
+                    <th class="settings">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="add()"><span class="fa fa-plus"></span></button>
+                    </th>
+                    <th>Tên</th>
+                    <th>Ngày sinh</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th>Vai trò</th>
+                    <th>Tên đăng nhập</th>
+                    <th>Password</th>
+                </thead>
+                <ng-container *ngFor="let user of users| slice:Paging.Size*(Paging.Index-1):Paging.Size*Paging.Index">
+                    <tbody>
+                        <td class="settings">
+                            <button class="btn btn-warning" (click)="edit(user)"><span class="fa fa-pencil-square-o"></span></button>
+                            <button class="btn btn-danger" 
+                                mwlConfirmationPopover
+                                [popoverTitle]=""  
+                                [popoverMessage]="'Bạn có muốn xóa không?'" 
+                                [confirmText]="'Có'" 
+                                [cancelText]="'Không'" 
+                                placement="right" 
+                                (confirm)="confirmClicked = true;deletebyId(user)"  
+                                (cancel)="cancelClicked = true" 
+                                confirmButtonType="danger" 
+                                cancelButtonType="defang-containert" 
+                                (click)="confirmClicked = false; cancelClicked = false"><span class="fa fa-trash"></span></button>
+                        </td>
+                        <td>{{user.user_manager_name}}</td>
+                        <td>{{user.user_manager_birthday}}</td>
+                        <td>{{user.user_manager_email}}</td>
+                        <td>{{user.user_manager_phone}}</td>
+                        <td>
+                            <ng-container *ngIf="user.user_manager_role===1">
+                                <div class="column-status"><span class="status-unactive"></span>CEO</div>
+                            </ng-container>
+                            <ng-container *ngIf="user.user_manager_role===2">
+                                <div class="column-status"><span class="status-active"></span>Quản lý</div>
+                            </ng-container>
+                            <ng-container *ngIf="user.user_manager_role===3">
+                                <div class="column-status"><span class="status-active"></span>Nhân viên</div>
+                            </ng-container>
+                        </td>
+                        <td>{{user.user_manager_username}}</td>
+                        <td>{{user.user_manager_password}}</td>
+                    </tbody>
+                </ng-container>
+            </table>
+        </div>
+        <div class="Paging">
+            <app-Paging [(Page)]="Paging" [totalData]="count" (onChange)='getUser()' [linkRoute]="'/admin/usermanager'"></app-Paging>
+        </div>
+    </div>
+</div>

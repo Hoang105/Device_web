@@ -1,0 +1,61 @@
+.row{
+    display: flex;
+    margin-left: auto;
+    .record-paging{
+        display: flex;
+        margin-left: auto;
+        .record-paging-lable{
+            padding: 0.9rem 0.2rem;
+            color: black
+        }
+    }
+}
+.Paging{
+    display: flex;
+    .totalDisplay{
+        margin-left: auto;
+
+    }
+    .paging-active {
+        color: white;
+        background-color: #0081ff;
+    }
+    .btn-paging{
+        display: flex;
+        margin-left: auto;
+    }
+}
+select{
+    padding: 0.2rem 0;
+    border: 1px solid #0081ff;
+    border-radius: 5px;
+}
+.option-style{
+    margin-top: 10px;
+    margin-left: 1.5rem;
+}
+.totalDisplay{
+    margin-left: 1rem;
+}
+.mat-button{
+    min-width: 40px;
+    padding: 0 10px;
+    border: 1px solid #0081ff;
+}
+.mat-button:hover{
+    background-color: #0081ff;
+    color: #ffffff!important;
+}
+@media (max-width:425px){
+    .row{
+        display: block;
+        .record-paging{
+            margin-bottom: 1rem;
+        }
+    }
+}
+@media (max-width:768px){
+    .btn-paging{
+        margin-left: 0!important;
+    }
+}

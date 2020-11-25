@@ -1,0 +1,41 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+import { ProjectEntity } from '../Models/Project/Project.Entity';
+import { LoaderService } from '../Share/Loader/Loader.service';
+import { HttpService } from './HttpService.service';
+
+@Injectable({
+    providedIn:'root'
+})
+export class ProjectService extends HttpService<ProjectEntity>{
+    localhost:string='/api/projects';
+
+    constructor(
+        private http: HttpClient,
+        public loaderService: LoaderService
+    ){
+        super(http,loaderService)
+    }
+    GetProject(){
+        return this.http.get(environment.api+this.localhost)
+        .pipe(map(r=> {return r;}))
+    }
+    DeleteById(Entity:ProjectEntity){
+        return this.http.delete(environment.api+this.localhost+ `/${Entity.project_id}`)
+        .pipe(map(r=> {return r;}))
+    }
+    EditById(Entity:ProjectEntity){
+        return this.http.put(environment.api+this.localhost+ `/${Entity.project_id}`,Entity)
+        .pipe(map(r=> {return r;}))
+    }
+    PostProject(Entity:ProjectEntity){
+        return this.http.post(environment.api+this.localhost,Entity)
+        .pipe(map(r=> {return r;}))
+    }
+    GetById(id:number){
+        return this.http.get(environment.api+this.localhost+ `/${id}`)
+        .pipe(map(r=> {return r;}))
+    }
+}

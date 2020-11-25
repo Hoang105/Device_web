@@ -1,0 +1,43 @@
+<div class="login-component">
+    <div class="login-container">
+        <div class="login-box">
+            <form class="login-form">
+                <div class="logo">
+                    <div>
+                        <img src="../../../assets/img/logo.jpg" width="100%" width="100px">
+                    </div>
+                </div>
+                <div class="login-title-box">
+                    <span class="login-text">LOGIN TO YOUR ACCOUNT</span>
+                </div>
+    
+                <div class="login-input">
+                    <div class="username-box">
+                        <div class="user-icon">
+                            <i class="fas fa-user "></i>
+                        </div>
+                        <input class="username" type="text" placeholder="Username" name="user_manager_username" [(ngModel)]="Login.user_manager_username">
+                    </div>
+                    <div class="password-box">
+                        <div class="pass-icon">
+                            <i class="fas fa-lock "></i>
+                        </div>
+                        <input class="password" type="password" placeholder="Password" name="user_manager_password" [(ngModel)]="Login.user_manager_password">
+                    </div>
+                </div>
+                <div class="wrongUser">{{LoginWrong}}</div>
+                <div class="login-btn-box">
+                    <button class="login-btn" (click)="CheckLogin()">Login</button>
+                    <!-- <button class="login-btn" (click)="Register()">Register</button> -->
+                </div>
+                <div class="login-btn-register">
+                    <div class="label-register">Don't have an account?</div>
+                    <div>
+                        <a href="/register">Create an account</a>
+                    </div>
+                </div>
+                
+            </form>
+    </div>
+    
+</div>

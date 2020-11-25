@@ -1,0 +1,103 @@
+
+.login-component{
+    width: 100%;
+    overflow: hidden;
+    background-image: linear-gradient(to right, #973a95, #055faa, );
+    // background-image: url("../../../assets/img/logo.jpg");
+    background-size: cover;
+    .login-container{
+        float: right;
+    
+        .login-box{
+            width: 25rem;
+            border: 1px solid #e4e5e6;
+            background-color: white;
+    
+            .login-form{
+                padding: 128px 48px 48px;
+                .logo{
+                    text-align: center;
+                }
+                .login-title-box{
+                    margin-top: 2rem;
+                    text-align: center;
+                    .login-text{
+                        font-size: 24px;
+                    }
+                    .signin-text{
+                        color: #73818f;
+                    }
+                }
+    
+                .login-input{
+                    margin-top: 2rem;
+                    .username-box{
+                        display: flex;
+                        margin-top: 12px;
+                        height: 4rem;
+                        border: 1px solid #f2f2f2;
+                        border-radius: 5px;
+                        .user-icon{
+                            width: 4rem;
+                            border-right: none;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            color: #73818f;
+                            .fa-user{
+                                font-size: 22px;
+                            }
+                        }
+                        .username{
+                            width: 100%;
+                            height: 100%;
+                            border-collapse: collapse;
+                            padding-left: 5px;
+                            font-size: 14px;
+                            border: none;
+                        }
+                        .username:focus{
+                            outline: none;
+                        }
+                    }
+    
+                    .password-box{
+                        @extend .username-box;
+                        .pass-icon{
+                            @extend .user-icon;
+                            .fa-lock{
+                                font-size: 22px;
+                            }
+                        }
+                        .password{
+                            @extend .username;
+                        }
+                    }
+                }
+    
+                .login-btn-box{
+                    margin-top: 2rem;
+                    .login-btn{
+                        background-color: #20a8d8;
+                        color: white;
+                        border: none;
+                        font-size: 20px;
+                        font-weight: bold;
+                        border-radius: 4px;
+                        width: 100%;
+                        padding: 0.2rem;
+                        margin-top: 10px;
+                    }
+                }
+                .login-btn-register{
+                    text-align: center;
+                    margin-top: 2rem;
+                }
+            }
+        }
+    }
+}
+.empty-field,
+.wrongUser{
+    color: #dc3545;
+}

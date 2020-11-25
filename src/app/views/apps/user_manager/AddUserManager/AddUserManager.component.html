@@ -1,0 +1,114 @@
+<div class="notication" id="notication">
+    <div>
+        <span class="fa fa-check"></span>
+        Lưu dữ liệu thành công
+        <button class="btn btn-danger" (click)="Close()">x</button>
+    </div>
+ </div>
+<div class="box-add">
+    <div>
+        <ul class="breadcrumb">
+            <li><a href="/admin">Trang chủ</a></li>
+            <li><a routerLink="/admin/usermanager">Quản lý nhân viên</a></li>
+          </ul>
+    </div>
+    <div>
+        <div class="title-header">
+            Thêm người quản lý
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5">
+            <div>
+                <label for="">Nhập tên:</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" [(ngModel)]="user.user_manager_name" placeholder="Nhập tên">
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <label for="">Nhập Số điện thoại:</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" [(ngModel)]="user.user_manager_phone" placeholder="Nhập số điện thoại">
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <label for="">Nhập Ngày sinh:</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" [(ngModel)]="user.user_manager_birthday" placeholder="Nhập ngày sinh">
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <label for="">Nhập Email:</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" [(ngModel)]="user.user_manager_email" placeholder="Nhập Email">
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <label for="">Nhập tên đăng nhập:</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" [(ngModel)]="user.user_manager_username" placeholder="Nhập tên đăng nhập">
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div>
+                <label for="">Vai trò</label>
+            </div>
+            <div>
+                <select name="" id="" class="form-control" (change)="selectOption($event.target.value)">
+                    <option value="{{user_role.id}}">{{user_role.role_manager_name}}</option>
+                    <ng-container *ngFor="let role of roles">
+                        <option value="{{role.role_manager_id}}">{{role.role_manager_name}}</option>
+                    </ng-container>
+                </select>
+            </div>
+        </div>
+        <div class="notication_password">
+            <div>
+                <label for="">Mật khẩu mặc định là: Abc@123</label>
+            </div>
+        </div>
+    </div>
+    <div class="btn-settings">
+        <div class="col-sm-4">
+            <button class="btn btn-primary" (click)="return()"><span class="fa fa-list"></span>Danh sách</button>
+            <button class="btn btn-success" (click)="submit()"><span class="fa fa-check"></span>Lưu</button>
+        </div>
+    </div>
+    <div>
+        <div class="title-header">
+            Thay đổi mật khẩu
+        </div>
+    </div>
+    <div class="btn-settings">
+        <div class="col-sm-4">
+            <div>
+                <label for="">Nhập Password:</label>
+            </div>
+            <div>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div>
+                <label for="">Nhập lại Password:</label>
+            </div>
+            <div>
+                <input type="text" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="btn-settings">
+        <div class="col-sm-4">
+            <button class="btn btn-success"><span class="fa fa-check"></span>Lưu</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="notication" id="notication">
+    <div>
+        <span class="fa fa-check"></span>
+        Lưu dữ liệu thành công
+        <button class="btn btn-danger" (click)="Close()">x</button>
+    </div>
+ </div>
+<div class="box-table">
+    <div>
+        <ul class="breadcrumb">
+            <li><a href="/admin">Trang chủ</a></li>
+            <li><a routerLink="/admin/projects">Quản lý dự án</a></li>
+          </ul>
+    </div>
+    <div>
+        <div class="table-reponsive">
+            <table>
+                <thead>
+                    <th class="settings">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="add()"><span class="fa fa-plus"></span></button>
+                    </th>
+                    <th>Mã dự án</th>
+                    <th>Tên dự án</th>
+                </thead>
+                <ng-container *ngFor="let p of projects| slice:Paging.Size*(Paging.Index-1):Paging.Size*Paging.Index">
+                    <tbody>
+                        <td class="settings">
+                            <button class="btn btn-warning" (click)="edit(p)"><span class="fa fa-pencil-square-o"></span></button>
+                            <button class="btn btn-danger" 
+                                mwlConfirmationPopover
+                                [popoverTitle]=""  
+                                [popoverMessage]="'Bạn có muốn xóa không?'" 
+                                [confirmText]="'Có'" 
+                                [cancelText]="'Không'" 
+                                placement="right" 
+                                (confirm)="confirmClicked = true;deletebyId(p)"  
+                                (cancel)="cancelClicked = true" 
+                                confirmButtonType="danger" 
+                                cancelButtonType="defang-containert" 
+                                (click)="confirmClicked = false; cancelClicked = false"><span class="fa fa-trash"></span></button>
+                        </td>
+                        <td>{{p.project_id}}</td>
+                        <td>{{p.project_name}}</td>
+                    </tbody>
+                </ng-container>
+            </table>
+        </div>
+        <div class="Paging">
+            <app-Paging [(Page)]="Paging" [totalData]="count" (onChange)='getProject()' [linkRoute]="'/admin/projects'"></app-Paging>
+        </div>
+    </div>
+</div>

@@ -7,6 +7,8 @@ import { PagingModule } from '../../../Share/paging/Paging.component';
 import { UserManagerComponent } from './UserManager.component';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { AddUserManagerComponent } from './AddUserManager/AddUserManager.component';
+import { PasswordComponent } from './AddUserManager/changePassword/changepassword.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 const routes:Routes=[
     {
@@ -33,11 +35,14 @@ const routes:Routes=[
         ConfirmationPopoverModule.forRoot({
             confirmButtonType: 'danger' // set defaults here
         }),
+        ModalModule.forRoot()
     ],
     declarations:[
         UserManagerComponent,
-        AddUserManagerComponent
+        AddUserManagerComponent,
+        PasswordComponent
     ],
+    entryComponents: [ PasswordComponent ],
     exports:[]
 })
 export class UserManagerModule{

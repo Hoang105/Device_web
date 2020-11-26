@@ -71,39 +71,22 @@
                 </select>
             </div>
         </div>
+        <div *ngIf="!edit" class="col-sm-5">
+            <div>
+                <label for="">Nhập mật khẩu:</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" [(ngModel)]="user.user_manager_password" placeholder="Nhập tên mật khẩu">
+            </div>
+        </div>
     </div>
     <div class="btn-settings">
         <div class="col-sm-4">
             <button class="btn btn-primary" (click)="return()"><span class="fa fa-list"></span>Danh sách</button>
             <button class="btn btn-success" (click)="submit()"><span class="fa fa-check"></span>Lưu</button>
-        </div>
-    </div>
-    <div>
-        <div class="title-header">
-            Thay đổi mật khẩu
-        </div>
-    </div>
-    <div class="btn-settings">
-        <div class="col-sm-4">
-            <div>
-                <label for="">Nhập Password:</label>
-            </div>
-            <div>
-                <input type="text" class="form-control">
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div>
-                <label for="">Nhập lại Password:</label>
-            </div>
-            <div>
-                <input type="text" class="form-control">
-            </div>
-        </div>
-    </div>
-    <div class="btn-settings">
-        <div class="col-sm-4">
-            <button class="btn btn-success"><span class="fa fa-check"></span>Lưu</button>
+            <ng-container *ngIf="edit">
+                <button class="btn btn-warning" (click)="changeUser(user)"><span class="fa fa-check"></span>Đổi mật khẩu</button>
+            </ng-container>
         </div>
     </div>
 </div>

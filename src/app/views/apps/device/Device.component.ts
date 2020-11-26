@@ -40,6 +40,7 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
     }
     ngOnChanges(data){
         this.devices=data.data;
+        this.count=this.devices.length;
     }
     Close(){
         setTimeout(() => {
@@ -86,10 +87,8 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
         )
     }
     FilterAll(filter:DeviceFilterEntity){
-        console.log(filter)
         this._deviceservice.Getfilter(filter).subscribe(
             data=>{
-                console.log(data)
                 this.ngOnChanges(data);
             }
         )

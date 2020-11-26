@@ -68,7 +68,6 @@ export class AddDeviceComponent implements OnInit{
         if(this.id!=0){
             this._deviceservice.EditById(this.device).subscribe(
                 (data:any)=>{
-                    console.log(data);
                     setTimeout(() => {
                         document.getElementById('notication').style.display='flex';
                     }, 300);
@@ -78,7 +77,9 @@ export class AddDeviceComponent implements OnInit{
         else{
             this._deviceservice.PostDevice(this.device).subscribe(
                 (data:any)=>{
-                    console.log(data)
+                    setTimeout(() => {
+                        document.getElementById('notication').style.display='flex';
+                    }, 300);
                 }
             )
         }

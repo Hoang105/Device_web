@@ -36,7 +36,6 @@ export class AddProjectComponent implements OnInit{
         if(this.id!=0){
             this._projectservice.EditById(this.project).subscribe(
                 (data:any)=>{
-                    console.log(data);
                     setTimeout(() => {
                         document.getElementById('notication').style.display='flex';
                     }, 300);
@@ -46,7 +45,9 @@ export class AddProjectComponent implements OnInit{
         else{
             this._projectservice.PostProject(this.project).subscribe(
                 (data:any)=>{
-                    console.log(data)
+                    setTimeout(() => {
+                        document.getElementById('notication').style.display='flex';
+                    }, 300);
                 }
             )
         }

@@ -12,6 +12,7 @@ import { UserManagerService } from '../../../Modules/UserManager.service';
 })
 export class UserManagerComponent extends CommonComponent<UserManagerEntity> implements OnInit{
     users:UserManagerEntity[];
+    admin:UserManagerEntity = new UserManagerEntity();
     role:RoleEntity[]
     constructor(
         private _usermanagerservice:UserManagerService,
@@ -66,6 +67,13 @@ export class UserManagerComponent extends CommonComponent<UserManagerEntity> imp
     ngOnInit(){
         this.Paging.Size=10;
         this.getUser();
+        this.getRole();
+        this.admin=JSON.parse(sessionStorage.getItem('currentUser'));
     }
-    
+    get isAdmin() {
+        return this.admin && this.admin.user_manager_role === 1;
+    }
+    get isUser1() {
+        return this.admin && this.admin.user_manager_role === 2;
+    }
 }

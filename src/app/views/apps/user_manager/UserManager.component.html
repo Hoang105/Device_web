@@ -16,7 +16,7 @@
         <div class="table-reponsive">
             <table>
                 <thead>
-                    <th class="settings">
+                    <th class="settings" *ngIf="isAdmin||isUser1">
                         <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="add()"><span class="fa fa-plus"></span></button>
                     </th>
                     <th>Tên</th>
@@ -25,11 +25,10 @@
                     <th>Số điện thoại</th>
                     <th>Vai trò</th>
                     <th>Tên đăng nhập</th>
-                    <th>Password</th>
                 </thead>
                 <ng-container *ngFor="let user of users| slice:Paging.Size*(Paging.Index-1):Paging.Size*Paging.Index">
                     <tbody>
-                        <td class="settings">
+                        <td class="settings" *ngIf="isAdmin||isUser1">
                             <button class="btn btn-warning" (click)="edit(user)"><span class="fa fa-pencil-square-o"></span></button>
                             <button class="btn btn-danger" 
                                 mwlConfirmationPopover
@@ -49,18 +48,13 @@
                         <td>{{user.user_manager_email}}</td>
                         <td>{{user.user_manager_phone}}</td>
                         <td>
-                            <ng-container *ngIf="user.user_manager_role===1">
-                                <div class="column-status"><span class="status-unactive"></span>CEO</div>
-                            </ng-container>
-                            <ng-container *ngIf="user.user_manager_role===2">
-                                <div class="column-status"><span class="status-active"></span>Quản lý</div>
-                            </ng-container>
-                            <ng-container *ngIf="user.user_manager_role===3">
-                                <div class="column-status"><span class="status-active"></span>Nhân viên</div>
+                            <ng-container *ngFor="let r of role">
+                                <ng-container *ngIf="user.user_manager_role===r.role_manager_id">
+                                    <div class="column-status"><span class="status-unactive"></span>{{r.role_manager_name}}</div>
+                                </ng-container>
                             </ng-container>
                         </td>
                         <td>{{user.user_manager_username}}</td>
-                        <td>{{user.user_manager_password}}</td>
                     </tbody>
                 </ng-container>
             </table>

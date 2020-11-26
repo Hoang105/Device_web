@@ -14,6 +14,7 @@ export class AddUserManagerComponent implements OnInit{
     user:UserManagerEntity=new UserManagerEntity();
     user_role:RoleEntity=new RoleEntity()
     roles:RoleEntity[];
+    admin:UserManagerEntity=new UserManagerEntity();
     constructor(
         private route: ActivatedRoute,
         private _usermanagerservice:UserManagerService,
@@ -39,6 +40,7 @@ export class AddUserManagerComponent implements OnInit{
                 }
             )
         }
+        this.admin=JSON.parse(sessionStorage.getItem('currentUser'));
     }
     submit(){
         if(this.id!=0){
@@ -52,7 +54,7 @@ export class AddUserManagerComponent implements OnInit{
             )
         }
         else{
-            this.user.user_manager_password='Abc@123';
+            this.user.user_manager_password='12345';
             this._usermanagerservice.PostUser(this.user).subscribe(
                 data=>{
                     console.log(data);
@@ -71,5 +73,8 @@ export class AddUserManagerComponent implements OnInit{
     }
     return(){
         this.router.navigate(['/admin/usermanager']);
+    }
+    get isAdmin() {
+        return this.admin && this.admin.user_manager_role === 1;
     }
 }

@@ -3,6 +3,7 @@ import { Component, OnChanges, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
 import { CommonComponent } from '../../../app.component';
 import { DeviceEntity } from '../../../Models/Device/Device.Entity';
+import { DeviceFilterEntity } from '../../../Models/Device/DeviceFilter.Entity';
 import { ProjectEntity } from '../../../Models/Project/Project.Entity';
 import { RoleEntity } from '../../../Models/Role/Role.Entity';
 import { UserManagerEntity } from '../../../Models/User_manager/UserManager.Entity';
@@ -24,8 +25,10 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
     devices:DeviceEntity[];
     projects:ProjectEntity[];
     users:UserManagerEntity[];
-    user:UserManagerEntity=new UserManagerEntity();
+    admin:UserManagerEntity=new UserManagerEntity();
     empList: Array<{name: string, message: string,status:boolean}> = [];
+    filter:DeviceFilterEntity=new DeviceFilterEntity();
+    deviceFilter:DeviceEntity[];
     date=new Date();
     constructor(
         private _deviceservice:DeviceService,
@@ -35,7 +38,8 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
     ){  
         super(_deviceservice)
     }
-    ngOnChanges(changes){
+    ngOnChanges(data){
+        this.devices=data.data;
     }
     Close(){
         setTimeout(() => {
@@ -81,6 +85,15 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
             }
         )
     }
+    FilterAll(filter:DeviceFilterEntity){
+        console.log(filter)
+        this._deviceservice.Getfilter(filter).subscribe(
+            data=>{
+                console.log(data)
+                this.ngOnChanges(data);
+            }
+        )
+    }
     deletebyId(data){
         this._deviceservice.DeleteById(data).subscribe(
             (data:any)=>{
@@ -108,10 +121,13 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
                 this.compareDate(this.devices);
             }
         )
-        this.user=JSON.parse(sessionStorage.getItem('currentUser'));
+        this.admin=JSON.parse(sessionStorage.getItem('currentUser'));
     }
     get isAdmin() {
-        return this.user && this.user.user_manager_role === 1;
+        return this.admin && this.admin.user_manager_role === 1;
+    }
+    get isUser1() {
+        return this.admin && this.admin.user_manager_role === 2;
     }
     
 }

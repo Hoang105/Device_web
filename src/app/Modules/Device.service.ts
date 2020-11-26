@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { DeviceEntity } from '../Models/Device/Device.Entity';
+import { DeviceFilterEntity } from '../Models/Device/DeviceFilter.Entity';
 import { ProjectEntity } from '../Models/Project/Project.Entity';
 import { LoaderService } from '../Share/Loader/Loader.service';
 import { HttpService } from './HttpService.service';
@@ -38,5 +39,11 @@ export class DeviceService extends HttpService<DeviceEntity>{
     GetById(id:number){
         return this.http.get(environment.api+this.localhost+ `/${id}`)
         .pipe(map(r=> {return r;}))
+    }
+    Getfilter(filter:DeviceFilterEntity){
+        return this.http.post(environment.api+this.localhost+'/getfilter',filter)
+        .pipe(map(r=> {
+            console.log(r)
+            return r;}))
     }
 }

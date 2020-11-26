@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
 import { CommonComponent } from '../../../app.component';
 import { ProjectEntity } from '../../../Models/Project/Project.Entity';
+import { UserManagerEntity } from '../../../Models/User_manager/UserManager.Entity';
 import { ProjectService } from '../../../Modules/Project.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { ProjectService } from '../../../Modules/Project.service';
 })
 export class ProjectComponent extends CommonComponent<ProjectEntity> implements OnInit{
     projects:ProjectEntity[];
+    admin:UserManagerEntity=new UserManagerEntity();
     constructor(
         private _projectservice:ProjectService,
         private router:Router,
@@ -57,6 +59,12 @@ export class ProjectComponent extends CommonComponent<ProjectEntity> implements 
     ngOnInit(){
         this.Paging.Size=10;
         this.getProject();
+        this.admin=JSON.parse(sessionStorage.getItem('currentUser'));
     }
-    
+    get isAdmin() {
+        return this.admin && this.admin.user_manager_role === 1;
+    }
+    get isUser1() {
+        return this.admin && this.admin.user_manager_role === 2;
+    }
 }

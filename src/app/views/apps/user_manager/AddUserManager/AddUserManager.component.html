@@ -58,7 +58,7 @@
                 <input type="text" class="form-control" [(ngModel)]="user.user_manager_username" placeholder="Nhập tên đăng nhập">
             </div>
         </div>
-        <div class="col-sm-5">
+        <div *ngIf="isAdmin" class="col-sm-5">
             <div>
                 <label for="">Vai trò</label>
             </div>
@@ -69,11 +69,6 @@
                         <option value="{{role.role_manager_id}}">{{role.role_manager_name}}</option>
                     </ng-container>
                 </select>
-            </div>
-        </div>
-        <div class="notication_password">
-            <div>
-                <label for="">Mật khẩu mặc định là: Abc@123</label>
             </div>
         </div>
     </div>

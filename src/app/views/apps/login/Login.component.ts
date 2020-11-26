@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit{
     ) {
     }
     ngOnInit(){
-        this.Login.user_manager_username='23123';
+        this.Login.user_manager_username='Admin';
         this.Login.user_manager_password='Abc@123';
     }
 
@@ -35,16 +35,6 @@ export class LoginComponent implements OnInit{
         this.submitted = true;
 
         this.loading = true;
-        // this.authenticationService.login(this.Login.user_manager_username, this.Login.user_manager_password)
-        //     .pipe(first())
-        //     .subscribe(
-        //         data => {
-        //             this.router.navigate([this.returnUrl]);
-        //         },
-        //         error => {
-        //             this.error = error;
-        //             this.loading = false;
-        //         });
         this._userservice.getLogin(this.Login.user_manager_username, this.Login.user_manager_password)
             .subscribe(
                 data => {

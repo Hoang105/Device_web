@@ -14,13 +14,13 @@
     </div>
     <div class="filter-data">
         <div class="filter-all">
-            <input type="text" class="form-control" placeholder=" Tìm toàn bộ dữ liệu">
+            <input type="text" class="form-control" placeholder=" Tìm toàn bộ dữ liệu" [(ngModel)]="filter.FilterAll" (keyup)="FilterAll(filter)">
         </div>
         <div class="btn-search">
-            <button class="btn btn-success"><span class="fa fa-search"></span>Search</button>
+            <button class="btn btn-success" (click)="FilterAll(filter)"><span class="fa fa-search"></span>Search</button>
         </div>
     </div>
-    <div id="form-warning">
+    <div id="form-warning" class="form-warning">
         <ng-container *ngFor="let e of empList">
             <div *ngIf="!e.status" class="warning-notications">
                 <div class="warnig-message">
@@ -44,8 +44,8 @@
         <div class="table-reponsive">
             <table>
                 <thead>
-                    <ng-container *ngIf="isAdmin">
-                        <th class="settings" style="min-width:150px;">
+                    <ng-container *ngIf="isAdmin||isUser1">
+                        <th class="settings" style="min-width:100px;">
                             <button class="btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="add()"><span class="fa fa-plus"></span></button>
                         </th>
                     </ng-container>
@@ -67,7 +67,7 @@
                 </thead>
                 <ng-container *ngFor="let d of devices| slice:Paging.Size*(Paging.Index-1):Paging.Size*Paging.Index">
                     <tbody>
-                        <ng-container *ngIf="isAdmin">
+                        <ng-container *ngIf="isAdmin||isUser1">
                             <td class="settings">
                                 <button class="btn btn-warning" (click)="edit(d)"><span class="fa fa-pencil-square-o"></span></button>
                                 <button class="btn btn-danger" 

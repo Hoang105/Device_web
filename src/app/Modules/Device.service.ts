@@ -42,8 +42,6 @@ export class DeviceService extends HttpService<DeviceEntity>{
     }
     Getfilter(filter:DeviceFilterEntity){
         return this.http.post(environment.api+this.localhost+'/getfilter',filter)
-        .pipe(map(r=> {
-            console.log(r)
-            return r;}))
+        .pipe(map(r=> {return r;}))
     }
 }

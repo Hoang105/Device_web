@@ -4,7 +4,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { RoleEntity } from '../../../../Models/Role/Role.Entity';
 import { UserManagerEntity } from '../../../../Models/User_manager/UserManager.Entity';
 import { UserManagerService } from '../../../../Modules/UserManager.service';
-import { PasswordComponent } from './changePassword/changepassword.component';
 
 @Component({
     selector:'app-add-UserManager',
@@ -85,12 +84,12 @@ export class AddUserManagerComponent implements OnInit{
         return this.admin && this.admin.user_manager_role === 1;
     }
   
-    changeUser(user:UserManagerEntity) {
-        this.modalRef = this.modalService.show(PasswordComponent,  {
-                initialState: {
-                title: 'Modal title',
-                data: user
-            }
-        });
-    }
+    // changeUser(user:UserManagerEntity) {
+    //     this.modalRef = this.modalService.show(PasswordComponent,  {
+    //             initialState: {
+    //             title: 'Modal title',
+    //             data: user
+    //         }
+    //     });
+    // }
 }

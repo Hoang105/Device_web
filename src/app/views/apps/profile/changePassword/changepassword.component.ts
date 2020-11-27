@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { UserManagerEntity } from '../../../../../Models/User_manager/UserManager.Entity';
-import { UserManagerService } from '../../../../../Modules/UserManager.service';
+import { UserManagerEntity } from '../../../../Models/User_manager/UserManager.Entity';
+import { UserManagerService } from '../../../../Modules/UserManager.service';
 
 @Component({
     selector:'app-password',

@@ -20,6 +20,11 @@ export const navItems: INavData[] = [
         name: 'Quản lý thiết bị',
         url: '/admin/devices',
         icon: 'icon-settings'
+      },
+      {
+        name: 'Thông tin tài khoản',
+        url: '/admin/profile',
+        icon: 'icon-settings'
       }
     ]
   },

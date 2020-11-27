@@ -9,12 +9,11 @@
     <div>
         <ul class="breadcrumb">
             <li><a href="/admin">Trang chủ</a></li>
-            <li><a routerLink="/admin/usermanager">Quản lý nhân viên</a></li>
           </ul>
     </div>
     <div>
         <div class="title-header">
-            Thêm người quản lý
+            Thông tin người dùng
         </div>
     </div>
     <div class="row">
@@ -63,7 +62,7 @@
                 <label for="">Vai trò</label>
             </div>
             <div>
-                <select name="" id="" class="form-control" (change)="selectOption($event.target.value)">
+                <select name="" id="" class="form-control" disabled>
                     <option value="{{user_role.id}}">{{user_role.role_manager_name}}</option>
                     <ng-container *ngFor="let role of roles">
                         <option value="{{role.role_manager_id}}">{{role.role_manager_name}}</option>
@@ -71,22 +70,11 @@
                 </select>
             </div>
         </div>
-        <div *ngIf="!edit" class="col-sm-5">
-            <div class="label">
-                <label for="">Nhập mật khẩu:</label>
-            </div>
-            <div>
-                <input type="text" class="form-control" [(ngModel)]="user.user_manager_password" placeholder="Nhập tên mật khẩu">
-            </div>
-        </div>
     </div>
     <div class="btn-settings">
         <div class="col-sm-4">
-            <button class="btn btn-primary" (click)="return()"><span class="fa fa-list"></span>Danh sách</button>
-            <button class="btn btn-success" (click)="submit()"><span class="fa fa-check"></span>Lưu</button>
-            <!-- <ng-container *ngIf="edit">
-                <button class="btn btn-warning" (click)="changeUser(user)"><span class="fa fa-check"></span>Đổi mật khẩu</button>
-            </ng-container> -->
+            <button class="btn btn-success" (click)="submit()"><span class="fa fa-check"></span>Thay đổi thông tin</button>
+            <button class="btn btn-warning" (click)="changeUser(user)"><span class="fa fa-check"></span>Đổi mật khẩu</button>
         </div>
     </div>
 </div>

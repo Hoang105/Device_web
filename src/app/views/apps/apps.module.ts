@@ -21,6 +21,10 @@ const AppRoutes:Routes=[
     {
       path:'devices',
       loadChildren: () => import('./device/Device.module').then(m => m.DevicetModule)
+    },
+    {
+      path:'profile',
+      loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
     }
 ]
 

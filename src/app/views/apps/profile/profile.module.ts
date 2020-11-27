@@ -4,23 +4,15 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { PagingModule } from '../../../Share/paging/Paging.component';
-import { UserManagerComponent } from './UserManager.component';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
-import { AddUserManagerComponent } from './AddUserManager/AddUserManager.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PasswordComponent } from './changePassword/changepassword.component';
+import { ProfileComponent } from './profile.component';
 
 const routes:Routes=[
     {
         path:'',
-        component:UserManagerComponent
-    },
-    {
-        path:'add',
-        component:AddUserManagerComponent
-    },
-    {
-        path:'edit/:id',
-        component:AddUserManagerComponent
+        component:ProfileComponent
     },
 ]
 
@@ -37,11 +29,12 @@ const routes:Routes=[
         ModalModule.forRoot()
     ],
     declarations:[
-        UserManagerComponent,
-        AddUserManagerComponent,
+        ProfileComponent,
+        PasswordComponent
     ],
+    entryComponents: [ PasswordComponent ],
     exports:[]
 })
-export class UserManagerModule{
+export class ProfileModule{
 
 }

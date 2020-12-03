@@ -14,4 +14,5 @@ export class DeviceEntity extends IEntity{
     device_other:string;
     device_user_report:string;
     user_manager_id:number;
+    status:number;
 }

@@ -1,7 +1,7 @@
 export class IEntity {
     // EmptyGuid = '00000000-0000-0000-0000-000000000000';
     // Id: string = this.EmptyGuid;
-    ID: number;
+    // ID: number;
     // STATUS:string;
     // CREATED_AT:Date;
     // CREATEDAT:Date;

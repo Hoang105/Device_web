@@ -16,8 +16,22 @@
         <div class="filter-all">
             <input type="text" class="form-control" placeholder=" Tìm toàn bộ dữ liệu" [(ngModel)]="filter.FilterAll" (keyup)="FilterAll(filter)">
         </div>
-        <div class="btn-search">
+        <div class="btn-search" style="margin-right:10px">
             <button class="btn btn-success" (click)="FilterAll(filter)"><span class="fa fa-search"></span>Search</button>
+        </div>
+        <div>
+            <div class="btn btn-primary" (click)="ShowInReport()">In báo cáo</div>
+        </div>
+        <div class="form-print" *ngIf="showprint">
+            <div style="margin-bottom: 0.3rem;">
+                <button class="btn btn-success" (click)="PrintData()">Báo cáo hết bảo hành</button>
+            </div>
+            <div style="margin-bottom: 0.3rem;">
+                <button class="btn btn-primary" (click)="PrintDataWrong()">Báo cáo thiết bị lỗi mới nhận</button>
+            </div>
+            <div>
+                <button class="btn btn-warning" (click)="PrintDataUpdate()">Báo cáo thiết bị đang sửa lỗi</button>
+            </div>
         </div>
     </div>
     <div id="form-warning" class="form-warning">
@@ -64,7 +78,40 @@
                     </th>
                     <th style="min-width:100px;">Thời hạn bảo hành</th>
                     <th style="min-width:200px;">Thông tin khác</th>
+                    <th style="min-width:100px;">Trạng thái</th>
                 </thead>
+                <tbody>
+                    <td></td>
+                    <td><input class="form-control" placeholder=" Tìm Tên thiết bị lỗi" [(ngModel)]="filter.device_name" (keyup)="FilterAll(filter)"></td>
+                    <td><input class="form-control" placeholder=" Tìm Model/SN" [(ngModel)]="filter.device_model_sn" (keyup)="FilterAll(filter)"></td>
+                    <td><input class="form-control" placeholder=" Tìm Nội dung chi tiết" [(ngModel)]="filter.device_content" (keyup)="FilterAll(filter)"></td>
+                    <td><input class="form-control" placeholder=" Tìm Địa điểm" [(ngModel)]="filter.device_location" (keyup)="FilterAll(filter)"></td>
+                    <td>
+                        <select class="form-control" placeholder="Chọn dự án" (change)="ChangeProject($event.target.value)">
+                            <option value="0">----</option>
+                            <option *ngFor="let p of projects" [value]="p.project_id">{{p.project_name}}</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td>
+                        <select class="form-control" placeholder="Chọn dự án" (change)="ChangeUser($event.target.value)">
+                            <option value="0">----</option>
+                            <option *ngFor="let u of users" [value]="u.user_manager_id">{{u.user_manager_name}}</option>
+                        </select>
+                    </td>
+                    <td><input class="form-control" placeholder=" Tìm Trạng thái" [(ngModel)]="filter.device_status" (keyup)="FilterAll(filter)"></td>
+                    <td><input class="form-control" placeholder=" Tìm ..." [(ngModel)]="filter.FilterAll" (keyup)="FilterAll(filter)"></td>
+                    <td></td>
+                    <td>
+                        <input class="form-control" placeholder=" Tìm Thông tin khác" [(ngModel)]="filter.device_other" (keyup)="FilterAll(filter)">
+                    </td>
+                    <td>
+                        <select class="form-control" placeholder="Chọn trạng thái" (change)="ChangeStatus($event.target.value)">
+                            <option value="0">----</option>
+                            <option *ngFor="let s of status" [value]="s.status_id">{{s.status_name}}</option>
+                        </select>
+                    </td>
+                </tbody>
                 <ng-container *ngFor="let d of devices| slice:Paging.Size*(Paging.Index-1):Paging.Size*Paging.Index">
                     <tbody>
                         <ng-container *ngIf="isAdmin||isUser1">
@@ -107,6 +154,13 @@
                         <td>{{d.device_user_report}}</td>
                         <td>{{d.device_warranty_period| date: 'HH:mm:ss dd-MM-yyyy'}}</td>
                         <td>{{d.device_other}}</td>
+                        <td>
+                            <ng-container *ngFor="let s of status">
+                                <ng-container *ngIf="d.status===s.status_id">
+                                    <div class="column-status"><span class="status-unactive"></span>{{s.status_name}}</div>
+                                </ng-container>
+                            </ng-container>
+                        </td>
                     </tbody>
                 </ng-container>
             </table>

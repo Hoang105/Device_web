@@ -6,8 +6,10 @@ import { DeviceEntity } from '../../../Models/Device/Device.Entity';
 import { DeviceFilterEntity } from '../../../Models/Device/DeviceFilter.Entity';
 import { ProjectEntity } from '../../../Models/Project/Project.Entity';
 import { RoleEntity } from '../../../Models/Role/Role.Entity';
+import { StatusEntity } from '../../../Models/Status/Status.Entity';
 import { UserManagerEntity } from '../../../Models/User_manager/UserManager.Entity';
 import { DeviceService } from '../../../Modules/Device.service';
+import { ExportService } from '../../../Modules/Export.service';
 import { ProjectService } from '../../../Modules/Project.service';
 import { UserManagerService } from '../../../Modules/UserManager.service';
 
@@ -23,33 +25,30 @@ export class Notication {
 })
 export class DeviceComponent extends CommonComponent<DeviceEntity> implements OnInit,OnChanges{
     devices:DeviceEntity[];
+    deviceprint:DeviceEntity[] = [];
+    deviceprintwrong:DeviceEntity[] = [];
+    deviceprintupdate:DeviceEntity[] = [];
+
     projects:ProjectEntity[];
     users:UserManagerEntity[];
+    status:StatusEntity[];
     admin:UserManagerEntity=new UserManagerEntity();
     empList: Array<{name: string, message: string,status:boolean}> = [];
     filter:DeviceFilterEntity=new DeviceFilterEntity();
     deviceFilter:DeviceEntity[];
     date=new Date();
+    showprint:boolean=false;
     constructor(
         private _deviceservice:DeviceService,
         private _projectservice:ProjectService,
         private _usermanagerservice:UserManagerService,
         private router:Router,
+        private _export:ExportService
     ){  
         super(_deviceservice)
     }
     ngOnChanges(data){
-        if(data.success=true){
-            this._deviceservice.GetDevice().subscribe(
-                (data:any)=>{
-                    this.devices=data.data;
-                    this.count=this.devices.length;
-                }
-            )
-        }
-        else{
-            this.devices=data;
-        }
+        this.devices=data;
     }
     Close(){
         setTimeout(() => {
@@ -61,6 +60,14 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
             (data:any)=>{
                 this.devices=data.data;
                 this.count=this.devices.length;
+            }
+        )
+    }
+    getStatus(){
+        this._deviceservice.GetStatus().subscribe(
+            (data:any)=>{
+                this.status=data.data;
+                console.log(status);
             }
         )
     }
@@ -77,6 +84,121 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
                 this.empList.push({name:this.devices[i].device_name,message:"bảo hiểm còn dưới 1 tháng" , status:false});
             }
         }
+    }
+    ChangeProject(e){
+        this.filter.device_project_id= +e;
+        this.FilterAll(this.filter);
+    }
+    ChangeUser(u){
+        this.filter.user_manager_id= +u;
+        this.FilterAll(this.filter);
+    }
+    ChangeStatus(e){
+        this.filter.status= +e;
+        this.FilterAll(this.filter);
+    }
+    ShowInReport(){
+        if(this.showprint==false){
+            this.showprint=true;
+        }
+        else{
+            this.showprint=false;
+        }
+    }
+    PrintData(){
+        for(var i=0;i<this.devices.length;i++){
+            var date1 = new Date().getTime();
+            var date2 = new Date(this.devices[i].device_warranty_period).getTime();
+            var milliseconds = date2-date1;
+            var days = milliseconds/86400000;
+            if (7>=days&&days>0){
+                this.deviceprint.push({  
+                    device_id:this.devices[i].device_id,
+                    device_name:this.devices[i].device_name,
+                    device_model_sn:this.devices[i].device_model_sn,
+                    device_content:this.devices[i].device_content,
+                    device_location:this.devices[i].device_location,
+                    device_project_id:this.devices[i].device_project_id,
+                    device_status:this.devices[i].device_status,
+                    device_produce:this.devices[i].device_produce,
+                    device_report:this.devices[i].device_report,
+                    device_warranty_period:this.devices[i].device_warranty_period,
+                    device_other:this.devices[i].device_other,
+                    device_user_report:this.devices[i].device_user_report,
+                    user_manager_id:this.devices[i].user_manager_id,
+                    status:this.devices[i].status
+                });
+            }
+            else if (30>=days&&days>7){
+                this.deviceprint.push({  
+                    device_id:this.devices[i].device_id,
+                    device_name:this.devices[i].device_name,
+                    device_model_sn:this.devices[i].device_model_sn,
+                    device_content:this.devices[i].device_content,
+                    device_location:this.devices[i].device_location,
+                    device_project_id:this.devices[i].device_project_id,
+                    device_status:this.devices[i].device_status,
+                    device_produce:this.devices[i].device_produce,
+                    device_report:this.devices[i].device_report,
+                    device_warranty_period:this.devices[i].device_warranty_period,
+                    device_other:this.devices[i].device_other,
+                    device_user_report:this.devices[i].device_user_report,
+                    user_manager_id:this.devices[i].user_manager_id,
+                    status:this.devices[i].status
+                });
+            }
+        }
+        this._export.exportAsExcelFile(this.deviceprint, 'Báo cáo hết bảo hành')
+    }
+    PrintDataWrong(){
+        for(var i=0;i<this.devices.length;i++){
+            var date1 = new Date().getTime();
+            var date2 = new Date(this.devices[i].device_report).getTime();
+            var milliseconds = date1-date2;
+            var days = milliseconds/86400000;
+            if (30>=days&&days>0&&this.devices[i].status==1){
+                this.deviceprintwrong.push({  
+                    device_id:this.devices[i].device_id,
+                    device_name:this.devices[i].device_name,
+                    device_model_sn:this.devices[i].device_model_sn,
+                    device_content:this.devices[i].device_content,
+                    device_location:this.devices[i].device_location,
+                    device_project_id:this.devices[i].device_project_id,
+                    device_status:this.devices[i].device_status,
+                    device_produce:this.devices[i].device_produce,
+                    device_report:this.devices[i].device_report,
+                    device_warranty_period:this.devices[i].device_warranty_period,
+                    device_other:this.devices[i].device_other,
+                    device_user_report:this.devices[i].device_user_report,
+                    user_manager_id:this.devices[i].user_manager_id,
+                    status:this.devices[i].status
+                });
+            }
+        }
+        this._export.exportAsExcelFile(this.deviceprintwrong, 'Báo cáo thiết bị lỗi')
+    }
+    PrintDataUpdate(){
+        for(var i=0;i<this.devices.length;i++){
+            if (this.devices[i].status==2){
+                this.deviceprintupdate.push({ 
+                    device_id:this.devices[i].device_id,
+                    device_name:this.devices[i].device_name,
+                    device_model_sn:this.devices[i].device_model_sn,
+                    device_content:this.devices[i].device_content,
+                    device_location:this.devices[i].device_location,
+                    device_project_id:this.devices[i].device_project_id,
+                    device_status:this.devices[i].device_status,
+                    device_produce:this.devices[i].device_produce,
+                    device_report:this.devices[i].device_report,
+                    device_warranty_period:this.devices[i].device_warranty_period,
+                    device_other:this.devices[i].device_other,
+                    device_user_report:this.devices[i].device_user_report,
+                    user_manager_id:this.devices[i].user_manager_id,
+                    status:this.devices[i].status
+                });
+            }
+        }
+        this._export.exportAsExcelFile(this.deviceprintupdate, 'Báo cáo đang sửa chữa')
     }
     getProject(){
         this._projectservice.GetProject().subscribe(
@@ -119,9 +241,13 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
         this.router.navigate([`/admin/devices/edit/${data.device_id}`]);
     }
     ngOnInit(){
+        this.getStatus();
         this.getUser();
         this.getProject();
         this.Paging.Size=10;
+        this.filter.device_project_id=0;
+        this.filter.user_manager_id=0;
+        this.filter.status=0;
         this._deviceservice.GetDevice().subscribe(
             (data:any)=>{
                 this.devices=data.data;

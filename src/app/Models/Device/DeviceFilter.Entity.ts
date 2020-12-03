@@ -11,4 +11,5 @@ export class DeviceFilterEntity extends FilterEntity{
     device_user_report:string;
     device_project_id:number;
     user_manager_id:number;
+    status:number;
 }

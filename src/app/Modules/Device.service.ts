@@ -20,6 +20,10 @@ export class DeviceService extends HttpService<DeviceEntity>{
     ){
         super(http,loaderService)
     }
+    GetStatus(){
+        return this.http.get(environment.api+"/api/device_status")
+        .pipe(map(r=> {return r;}))
+    }
     GetDevice(){
         return this.http.get(environment.api+this.localhost)
         .pipe(map(r=> {return r;}))

@@ -76,7 +76,7 @@
                 }
     
                 .login-btn-box{
-                    margin-top: 2rem;
+                    margin-top: 1rem;
                     .login-btn{
                         background-color: #20a8d8;
                         color: white;
@@ -96,6 +96,11 @@
             }
         }
     }
+}
+.warning-error{
+    color: rgb(223, 32, 41);
+    text-align: center;
+    margin-top: 1rem;
 }
 .empty-field,
 .wrongUser{

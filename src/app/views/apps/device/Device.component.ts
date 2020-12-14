@@ -1,17 +1,18 @@
 import { formatDate } from '@angular/common';
 import { Component, OnChanges, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CommonComponent } from '../../../app.component';
 import { DeviceEntity } from '../../../Models/Device/Device.Entity';
 import { DeviceFilterEntity } from '../../../Models/Device/DeviceFilter.Entity';
 import { ProjectEntity } from '../../../Models/Project/Project.Entity';
-import { RoleEntity } from '../../../Models/Role/Role.Entity';
 import { StatusEntity } from '../../../Models/Status/Status.Entity';
 import { UserManagerEntity } from '../../../Models/User_manager/UserManager.Entity';
 import { DeviceService } from '../../../Modules/Device.service';
 import { ExportService } from '../../../Modules/Export.service';
 import { ProjectService } from '../../../Modules/Project.service';
 import { UserManagerService } from '../../../Modules/UserManager.service';
+import { NotificationWarningComponent } from './NotificationWarning/NotificationWarning.component';
 
 export class Notication {
     name:string;
@@ -28,22 +29,24 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
     deviceprint:DeviceEntity[] = [];
     deviceprintwrong:DeviceEntity[] = [];
     deviceprintupdate:DeviceEntity[] = [];
-
+    modalRef: BsModalRef;
     projects:ProjectEntity[];
     users:UserManagerEntity[];
     status:StatusEntity[];
     admin:UserManagerEntity=new UserManagerEntity();
-    empList: Array<{name: string, message: string,status:boolean}> = [];
+    empList: Array<{id:number, name: string, message: string,status:boolean,error:boolean}> = [];
     filter:DeviceFilterEntity=new DeviceFilterEntity();
     deviceFilter:DeviceEntity[];
     date=new Date();
     showprint:boolean=false;
+    notication:boolean=false;
     constructor(
         private _deviceservice:DeviceService,
         private _projectservice:ProjectService,
         private _usermanagerservice:UserManagerService,
         private router:Router,
-        private _export:ExportService
+        private _export:ExportService,
+        private modalService: BsModalService
     ){  
         super(_deviceservice)
     }
@@ -67,9 +70,15 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
         this._deviceservice.GetStatus().subscribe(
             (data:any)=>{
                 this.status=data.data;
-                console.log(status);
             }
         )
+    }
+    DataWarning(data){
+        for(var i=0;i<data.length;i++){
+            if (data[i].status==1){
+                this.empList.push({id:this.devices[i].device_id, name:this.devices[i].device_name,message:"Thiết bị lỗi", status:false,error:true });
+            }
+        }
     }
     compareDate(data){
         for(var i=0;i<data.length;i++){
@@ -78,10 +87,10 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
             var milliseconds = date2-date1;
             var days = milliseconds/86400000;
             if (7>=days&&days>0){
-                this.empList.push({name:this.devices[i].device_name,message:"bảo hiểm còn dưới 1 tuần", status:true });
+                this.empList.push({id:this.devices[i].device_id, name:this.devices[i].device_name,message:"bảo hiểm còn dưới 1 tuần", status:true, error:false });
             }
             else if (30>=days&&days>7){
-                this.empList.push({name:this.devices[i].device_name,message:"bảo hiểm còn dưới 1 tháng" , status:false});
+                this.empList.push({id:this.devices[i].device_id, name:this.devices[i].device_name,message:"bảo hiểm còn dưới 1 tháng" , status:false, error:false});
             }
         }
     }
@@ -208,7 +217,7 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
         )
     }
     TurnOffNoti(){
-        document.getElementById("form-warning").style.display = "none";
+        this.notication=false;
     }
     getUser(){
         this._usermanagerservice.GetUserManager().subscribe(
@@ -234,6 +243,13 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
             }
         )
     }
+    GetdetailNoti(event){
+        this.modalRef = this.modalService.show(NotificationWarningComponent,  {
+            initialState: {
+            title: 'Modal title',
+            data: event
+        }});
+    }
     add(){
         this.router.navigate(['/admin/devices/add']);
     }
@@ -253,8 +269,10 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
                 this.devices=data.data;
                 this.count=this.devices.length;
                 this.compareDate(this.devices);
+                this.DataWarning(this.devices)
             }
         )
+        this.notication=true;
         this.admin=JSON.parse(sessionStorage.getItem('currentUser'));
     }
     get isAdmin() {
@@ -263,5 +281,4 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
     get isUser1() {
         return this.admin && this.admin.user_manager_role === 2;
     }
-    
 }

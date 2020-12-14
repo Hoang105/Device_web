@@ -1,0 +1,41 @@
+<div class="content-infor">
+    <div>
+        <div class="title-header">
+            Thông tin dự án
+        </div>
+    </div>
+    <div class="row form-name">
+        <div class="col-sm-4">
+            <span class="label-header">
+                Tên dự án
+            </span>
+        </div>
+        <div class="col-sm-8">
+            {{data.project_name}}
+        </div>
+    </div>
+    <div class="row form-name">
+        <div class="col-sm-4">
+            <span class="label-header">
+                Nội dung
+            </span>
+        </div>
+        <div class="col-sm-8">
+            {{data.project_content}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <span class="label-header">
+                Các thiết bị thuộc dự án:
+            </span>
+        </div>
+        <div class="col-sm-8">
+            <ul class="" style="padding: 0;" *ngFor="let d of empList">
+                <li>
+                    {{d?.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

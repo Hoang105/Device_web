@@ -7,6 +7,8 @@ import { PagingModule } from '../../../Share/paging/Paging.component';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { DeviceComponent } from './Device.component';
 import { AddDeviceComponent } from './AddDevice/AddDevice.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { NotificationWarningComponent } from './NotificationWarning/NotificationWarning.component';
 
 const routes:Routes=[
     {
@@ -33,11 +35,14 @@ const routes:Routes=[
         ConfirmationPopoverModule.forRoot({
             confirmButtonType: 'danger' // set defaults here
         }),
+        ModalModule.forRoot()
     ],
     declarations:[
         DeviceComponent,
-        AddDeviceComponent
+        AddDeviceComponent,
+        NotificationWarningComponent
     ],
+    entryComponents: [ NotificationWarningComponent ],
     exports:[]
 })
 export class DevicetModule{

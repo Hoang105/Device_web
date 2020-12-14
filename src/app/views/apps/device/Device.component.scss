@@ -15,6 +15,7 @@
     }
 }
 .form-warning{
+    cursor: pointer;
     position: absolute;
 }
 .form-print{
@@ -72,6 +73,7 @@
         display: flex;
         color: #ffffff;
         .warnig-message{
+            width: 100%;
             padding: 7px;
             text-transform: capitalize;
         }
@@ -91,6 +93,7 @@
         display: flex;
         color: #ffffff;
         .danger-message{
+            width: 100%;
             padding: 7px;
             text-transform: capitalize;
         }

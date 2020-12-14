@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit{
     loginForm: FormGroup;
     loading = false;
     submitted = false;
-    error = '';
     returnUrl: string='/admin';
+    error:boolean=false;
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -26,11 +26,7 @@ export class LoginComponent implements OnInit{
     ) {
     }
     ngOnInit(){
-        this.Login.user_manager_username='Admin';
-        this.Login.user_manager_password='Abc@123';
     }
-
-
     CheckLogin(){
         this.submitted = true;
 
@@ -38,12 +34,17 @@ export class LoginComponent implements OnInit{
         this._userservice.getLogin(this.Login.user_manager_username, this.Login.user_manager_password)
             .subscribe(
                 data => {
-                    this.router.navigate([this.returnUrl]);
+                    if(data==true){
+                        this.router.navigate([this.returnUrl]);
+                        this.error=false;
+                    }
+                    else{
+                        this.error=true;
+                    }
                 },
                 error => {
                     this.error = error;
                     this.loading = false;
                 });
     }
-    
 }

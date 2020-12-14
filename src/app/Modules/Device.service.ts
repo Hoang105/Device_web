@@ -48,4 +48,8 @@ export class DeviceService extends HttpService<DeviceEntity>{
         return this.http.post(environment.api+this.localhost+'/getfilter',filter)
         .pipe(map(r=> {return r;}))
     }
+    GetByIdStatus(id:number){
+        return this.http.get(environment.api+"/api/device_status"+ `/${id}`)
+        .pipe(map(r=> {return r;}))
+    }
 }

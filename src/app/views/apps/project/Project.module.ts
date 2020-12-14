@@ -7,6 +7,8 @@ import { PagingModule } from '../../../Share/paging/Paging.component';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { ProjectComponent } from './Project.component';
 import { AddProjectComponent } from './AddProject/AddProject.component';
+import { PopupInforProjectComponent } from './popupInforProject/popupInforProject.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 const routes:Routes=[
     {
@@ -33,11 +35,14 @@ const routes:Routes=[
         ConfirmationPopoverModule.forRoot({
             confirmButtonType: 'danger' // set defaults here
         }),
+        ModalModule.forRoot()
     ],
     declarations:[
         ProjectComponent,
-        AddProjectComponent
+        AddProjectComponent,
+        PopupInforProjectComponent
     ],
+    entryComponents: [ PopupInforProjectComponent ],
     exports:[]
 })
 export class ProjectModule{

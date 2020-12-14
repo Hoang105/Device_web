@@ -34,19 +34,19 @@
             </div>
         </div>
     </div>
-    <div id="form-warning" class="form-warning">
+    <div *ngIf="notication" class="form-warning">
         <ng-container *ngFor="let e of empList">
             <div *ngIf="!e.status" class="warning-notications">
-                <div class="warnig-message">
-                    Warning {{e.name}} {{e.message}}
+                <div class="warnig-message"  (click)="GetdetailNoti(e)">
+                    {{e.name}} {{e.message}}
                 </div>
                 <div class="fix-btn-warning">
                     <button class="btn btn-warning" (click)="TurnOffNoti()">x</button>
                 </div>
             </div>
             <div *ngIf="e.status" class="danger-notications">
-                <div class="danger-message">
-                    {{e.message}}
+                <div class="danger-message" (click)="GetdetailNoti(e)">
+                    {{e.name}} {{e.message}}
                 </div>
                 <div class="fix-btn-danger">
                     <button class="btn btn-danger" (click)="TurnOffNoti()">x</button>

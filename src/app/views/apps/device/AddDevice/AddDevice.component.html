@@ -118,6 +118,19 @@
                 <textarea type="text" class="form-control" rows="5" [(ngModel)]="device.device_user_report" placeholder="Nhập tên"></textarea>
             </div>
         </div>
+        <div class="col-sm-5">
+            <div class="label">
+                <label for="">Chọn trạng thái:</label>
+            </div>
+            <div>
+                <select name="" id="" class="form-control" (change)="selectStatus($event.target.value)">
+                    <option value="{{device_status.status_id}}">{{device_status.status_name}}</option>
+                    <ng-container *ngFor="let s of status">
+                        <option value="{{s.status_id}}">{{s.status_name}}</option>
+                    </ng-container>
+                </select>
+            </div>
+        </div>
     </div>
     <div class="btn-settings">
         <div class="col-sm-4">

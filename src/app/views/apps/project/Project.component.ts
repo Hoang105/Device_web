@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CommonComponent } from '../../../app.component';
 import { ProjectEntity } from '../../../Models/Project/Project.Entity';
 import { UserManagerEntity } from '../../../Models/User_manager/UserManager.Entity';
 import { ProjectService } from '../../../Modules/Project.service';
+import { PopupInforProjectComponent } from './popupInforProject/popupInforProject.component';
 
 @Component({
     selector:'app-Project',
@@ -13,9 +15,11 @@ import { ProjectService } from '../../../Modules/Project.service';
 export class ProjectComponent extends CommonComponent<ProjectEntity> implements OnInit{
     projects:ProjectEntity[];
     admin:UserManagerEntity=new UserManagerEntity();
+    modalRef: BsModalRef;
     constructor(
         private _projectservice:ProjectService,
         private router:Router,
+        private modalService: BsModalService
     ){  
         super(_projectservice)
     }
@@ -66,5 +70,13 @@ export class ProjectComponent extends CommonComponent<ProjectEntity> implements 
     }
     get isUser1() {
         return this.admin && this.admin.user_manager_role === 2;
+    }
+    Showdata(e:ProjectEntity){
+        this.modalRef = this.modalService.show(PopupInforProjectComponent,  {
+            initialState: {
+            title: 'Modal title',
+            data: e
+        }
+    });
     }
 }

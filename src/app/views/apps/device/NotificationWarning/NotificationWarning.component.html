@@ -1,0 +1,78 @@
+<div *ngIf="!data.error" class="form-warning-date">
+    <div class="content-infor">
+        <div>
+            <div class="title-header">
+                Cảnh báo thiết bị:
+            </div>
+        </div>
+        <div class="row form-name">
+            <div class="col-sm-5">
+                <span class="label-header">
+                    Tên thiết bị:
+                </span>
+            </div>
+            <div class="col-sm-7">
+                {{data.name}}
+            </div>
+        </div>
+        <div class="row form-name">
+            <div class="col-sm-5">
+                <span class="label-header">
+                    Nội dung cảnh báo
+                </span>
+            </div>
+            <div class="col-sm-7">
+                {{data.message}}
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="data.error" class="form-warning-error">
+    <div class="content-infor">
+        <div>
+            <div class="title-header">
+                Cảnh báo thiết bị:
+            </div>
+        </div>
+        <div class="row form-name">
+            <div class="col-sm-5">
+                <span class="label-header">
+                    Tên thiết bị:
+                </span>
+            </div>
+            <div class="col-sm-7">
+                {{datashow?.device_name}}
+            </div>
+        </div>
+        <div class="row form-name">
+            <div class="col-sm-5">
+                <span class="label-header">
+                    Nội dung cảnh báo
+                </span>
+            </div>
+            <div class="col-sm-7">
+                {{data.message}}
+            </div>
+        </div>
+        <div class="row form-name">
+            <div class="col-sm-5">
+                <span class="label-header">
+                    Trạng thái lỗi:
+                </span>
+            </div>
+            <div class="col-sm-7">
+                {{datashow?.device_content}}
+            </div>
+        </div>
+        <div class="row form-name">
+            <div class="col-sm-5">
+                <span class="label-header">
+                    Trạng thái(quá trình chi tiết):
+                </span>
+            </div>
+            <div class="col-sm-7">
+                {{datashow?.device_status}}
+            </div>
+        </div>
+    </div>
+</div>

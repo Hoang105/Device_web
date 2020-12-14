@@ -34,7 +34,7 @@ export class UserManagerService extends HttpService<UserManagerEntity>{
                 if(username==r.data[i].user_manager_username&&password==r.data[i].user_manager_password){
                     sessionStorage.setItem('currentUser', JSON.stringify(r.data[i]));
                     this.currentUserSubject.next(r.data[i]);
-                    return r.data[i];
+                    return true;
                 }
             }
         }))

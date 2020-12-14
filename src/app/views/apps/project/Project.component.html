@@ -23,7 +23,7 @@
                     <th>Tên dự án</th>
                 </thead>
                 <ng-container *ngFor="let p of projects| slice:Paging.Size*(Paging.Index-1):Paging.Size*Paging.Index">
-                    <tbody>
+                    <tbody (click)=Showdata(p)>
                         <td class="settings" *ngIf="isAdmin||isUser1">
                             <button class="btn btn-warning" (click)="edit(p)"><span class="fa fa-pencil-square-o"></span></button>
                             <button class="btn btn-danger" 

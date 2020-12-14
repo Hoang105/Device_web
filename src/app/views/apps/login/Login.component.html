@@ -14,7 +14,7 @@
                 <div class="login-input">
                     <div class="username-box">
                         <div class="user-icon">
-                            <i class="fas fa-user "></i>
+                            <i class="fas fa-user"></i>
                         </div>
                         <input class="username" type="text" placeholder="Username" name="user_manager_username" [(ngModel)]="Login.user_manager_username">
                     </div>
@@ -25,19 +25,14 @@
                         <input class="password" type="password" placeholder="Password" name="user_manager_password" [(ngModel)]="Login.user_manager_password">
                     </div>
                 </div>
-                <div class="wrongUser">{{LoginWrong}}</div>
-                <div class="login-btn-box">
-                    <button class="login-btn" (click)="CheckLogin()">Login</button>
-                    <!-- <button class="login-btn" (click)="Register()">Register</button> -->
-                </div>
-                <div class="login-btn-register">
-                    <div class="label-register">Don't have an account?</div>
+                <div *ngIf="error" class="warning-error">
                     <div>
-                        <a href="/register">Create an account</a>
+                        Tài khoản hoặc mật khẩu không chính xác
                     </div>
                 </div>
-                
+                <div class="login-btn-box">
+                    <button class="login-btn" (click)="CheckLogin()">Login</button>
+                </div>
             </form>
     </div>
-    
 </div>

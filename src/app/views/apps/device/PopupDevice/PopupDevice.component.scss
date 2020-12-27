@@ -1,0 +1,49 @@
+@media(min-width:1024px){
+    .content-infor{
+        max-height: 600px;
+    }
+}
+.title-header{
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+.content-infor{
+    padding: 2rem;
+}
+.label-header{
+    font-size: 16px;
+    font-weight: 500;
+}
+.form-name{
+    margin-bottom: 1rem;
+}
+.display-flex{
+    display: flex;
+}
+.mr-l{
+    margin-left: auto;
+}
+.table-reponsive{
+    overflow-x: auto;
+    height: 200px;
+    table{
+        width: 100%;
+        th{
+            min-width: 120px;
+            background-color: #135dfc;
+            color: #ffffff;
+            border: 1px solid #f9f9f9;
+            text-align: center;
+            padding: 10px;
+        }
+        td{
+            overflow: auto;
+            padding: 10px;
+        }
+        tbody:hover{
+            background-color: #c0d6ff;
+        }
+    }
+}

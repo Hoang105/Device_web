@@ -4,7 +4,8 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { DeviceEntity } from '../Models/Device/Device.Entity';
 import { DeviceFilterEntity } from '../Models/Device/DeviceFilter.Entity';
-import { ProjectEntity } from '../Models/Project/Project.Entity';
+import { HistoryFilterEntity } from '../Models/History/FIlterHistory.Entity';
+import { HistoryEntity } from '../Models/History/History.Entity';
 import { LoaderService } from '../Share/Loader/Loader.service';
 import { HttpService } from './HttpService.service';
 
@@ -19,6 +20,14 @@ export class DeviceService extends HttpService<DeviceEntity>{
         public loaderService: LoaderService
     ){
         super(http,loaderService)
+    }
+    PostHistorty(Entity:HistoryEntity){
+        return this.http.post(environment.api+"/api/device_history",Entity)
+        .pipe(map(r=> {return r;}))
+    }
+    GetFilterHistorty(filter:HistoryFilterEntity){
+        return this.http.post(environment.api+"/api/device_history/getfilterhistory",filter)
+        .pipe(map(r=> {return r;}))
     }
     GetStatus(){
         return this.http.get(environment.api+"/api/device_status")

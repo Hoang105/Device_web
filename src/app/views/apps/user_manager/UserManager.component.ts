@@ -13,7 +13,8 @@ import { UserManagerService } from '../../../Modules/UserManager.service';
 export class UserManagerComponent extends CommonComponent<UserManagerEntity> implements OnInit{
     users:UserManagerEntity[];
     admin:UserManagerEntity = new UserManagerEntity();
-    role:RoleEntity[]
+    role:RoleEntity[];
+    date=new Date();
     constructor(
         private _usermanagerservice:UserManagerService,
         private router:Router,

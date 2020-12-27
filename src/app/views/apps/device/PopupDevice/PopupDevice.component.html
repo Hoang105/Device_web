@@ -1,0 +1,107 @@
+<div class="content-infor">
+    <div>
+        <div class="title-header">
+            Thông tin thiết bị
+        </div>
+    </div>
+    <div class="row form-name">
+        <div class="col-sm-4">
+            <span class="label-header">
+                Tên thiết bị
+            </span>
+        </div>
+        <div class="col-sm-8">
+            {{data.device_name}}
+        </div>
+    </div>
+    <div class="row form-name">
+        <div class="col-sm-4">
+            <span class="label-header">
+                Nội dung chi tiết
+            </span>
+        </div>
+        <div class="col-sm-8">
+            {{data.device_content}}
+        </div>
+    </div>
+    <div class="row form-name">
+        <div class="col-sm-4">
+            <span class="label-header">
+                Thuộc dự án:
+            </span>
+        </div>
+        <div class="col-sm-8">
+            <div class="display-flex">
+                <div>
+                    {{data?.device_project_name}}
+                </div>
+                <div class="mr-l">
+                    <a class="" style="cursor: pointer;" *ngIf="!showdetail" (click)="ShowdetailProject()"><span
+                            class="fa fa-plus"></span></a>
+                    <a class="" style="cursor: pointer;" *ngIf="showdetail" (click)="HidendetailProject()"><span
+                            class="fa fa-minus"></span></a>
+                </div>
+            </div>
+            <div *ngIf="showdetail">
+                <div class="form-show-project">
+                    {{project.project_content}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row form-name">
+        <div class="col-sm-4">
+            <span class="label-header">
+                Quá trình xử lý
+            </span>
+        </div>
+        <div class="col-sm-8">
+            {{data.device_status}}
+        </div>
+    </div>
+    <div class="form-name">
+        <div class="header-history">
+            <div class="display-flex">
+                <div class="label-header" style="margin-bottom: 1rem;">
+                    Lịch sử thay đổi
+                </div>
+                <div class="mr-l">
+                    <a class="" style="cursor: pointer;" *ngIf="!showhistory" (click)="Showhistory()"><span
+                            class="fa fa-plus"></span></a>
+                    <a class="" style="cursor: pointer;" *ngIf="showhistory" (click)="Hidenhistory()"><span
+                            class="fa fa-minus"></span></a>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="showhistory">
+            <div class="table-reponsive">
+                <table>
+                    <thead>
+                        <th>Thiết bị</th>
+                        <th>Trạng thái</th>
+                        <th>Ngày thay đổi</th>
+                        <th>Người thay đổi</th>
+                    </thead>
+                    <ng-container>
+                        <tbody *ngFor="let item of loghistories">
+                            <td>{{data.device_name}}</td>
+                            <td>{{item.device_history_status}}</td>
+                            <td>{{item.device_history_change}}</td>
+                            <td>
+                                <ng-container *ngFor="let user of users">
+                                    <ng-container *ngIf="item.user_change_id===user.user_manager_id">
+                                        <div class="column-status"><span
+                                                class="status-unactive"></span>{{user.user_manager_name}}</div>
+                                    </ng-container>
+                                </ng-container>
+                            </td>
+                        </tbody>
+                    </ng-container>
+                </table>
+            </div>
+            <!-- <div class="Paging">
+                <app-Paging [(Page)]="Paging" [totalData]="count" (onChange)='gethistory()'></app-Paging>
+            </div> -->
+        </div>
+    </div>
+</div>

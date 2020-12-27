@@ -44,7 +44,7 @@
                                 (click)="confirmClicked = false; cancelClicked = false"><span class="fa fa-trash"></span></button>
                         </td>
                         <td>{{user.user_manager_name}}</td>
-                        <td>{{user.user_manager_birthday}}</td>
+                        <td>{{user.user_manager_birthday | date: 'HH:mm:ss dd-MM-yyyy'}}</td>
                         <td>{{user.user_manager_email}}</td>
                         <td>{{user.user_manager_phone}}</td>
                         <td>

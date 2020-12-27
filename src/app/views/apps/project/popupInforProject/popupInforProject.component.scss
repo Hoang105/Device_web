@@ -14,3 +14,8 @@
 .form-name{
     margin-bottom: 1rem;
 }
+@media(min-width:1024px){
+    .content-infor{
+        max-height: 600px;
+    }
+}

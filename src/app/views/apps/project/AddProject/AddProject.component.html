@@ -4,7 +4,7 @@
         Lưu dữ liệu thành công
         <button class="btn btn-danger" (click)="Close()">x</button>
     </div>
- </div>
+</div>
 <div class="box-add">
     <div>
         <ul class="breadcrumb">
@@ -17,22 +17,21 @@
             Thêm dự án
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-5">
-            <div>
-                <label for="">Nhập tên:</label>
-            </div>
-            <div>
-                <input type="text" class="form-control" [(ngModel)]="project.project_name" placeholder="Nhập tên">
-            </div>
+    <div class="mr-b-1">
+        <div>
+            <label for="">Tên dự án:</label>
         </div>
         <div class="col-sm-5">
-            <div>
-                <label for="">Nhập nội dung:</label>
-            </div>
-            <div>
-                <input type="text" class="form-control" [(ngModel)]="project.project_content" placeholder="Nhập nội dung">
-            </div>
+            <input type="text" class="form-control" [(ngModel)]="project.project_name" placeholder="Nhập tên">
+        </div>
+    </div>
+    <div>
+        <div>
+            <label>Mô tả chi tiết dự án:</label>
+        </div>
+        <div class="col-sm-5">
+            <textarea type="text" rows="5" class="form-control" [(ngModel)]="project.project_content"
+                placeholder="Nhập nội dung"></textarea>
         </div>
     </div>
     <div class="btn-settings">

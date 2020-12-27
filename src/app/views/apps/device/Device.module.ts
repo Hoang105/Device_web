@@ -9,6 +9,7 @@ import { DeviceComponent } from './Device.component';
 import { AddDeviceComponent } from './AddDevice/AddDevice.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NotificationWarningComponent } from './NotificationWarning/NotificationWarning.component';
+import { PopupDeviceComponent } from './PopupDevice/PopupDevice.component';
 
 const routes:Routes=[
     {
@@ -40,9 +41,12 @@ const routes:Routes=[
     declarations:[
         DeviceComponent,
         AddDeviceComponent,
-        NotificationWarningComponent
+        NotificationWarningComponent,
+        PopupDeviceComponent
     ],
-    entryComponents: [ NotificationWarningComponent ],
+    entryComponents: [ NotificationWarningComponent,
+        PopupDeviceComponent
+    ],
     exports:[]
 })
 export class DevicetModule{

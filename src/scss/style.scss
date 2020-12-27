@@ -6,3 +6,9 @@
 
 // If you want to add something do it here
 @import "custom";
+
+@media (min-width: 1024px){
+    .modal-dialog {
+        max-width: 800px;
+    }
+}

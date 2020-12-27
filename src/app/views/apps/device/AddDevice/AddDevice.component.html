@@ -92,7 +92,7 @@
                 <label for="">Chọn Nhân sự xử lý/theo dõi:</label>
             </div>
             <div>
-                <select name="" id="" class="form-control" (change)="selectOption($event.target.value)">
+                <select name="" id="" class="form-control" (change)="selectOptionUser($event.target.value)">
                     <option value="{{user_device_name.user_manager_id}}">{{user_device_name.user_manager_name}}</option>
                     <ng-container *ngFor="let user of users">
                         <option value="{{user.user_manager_id}}">{{user.user_manager_name}}</option>

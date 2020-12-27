@@ -113,7 +113,7 @@
                     </td>
                 </tbody>
                 <ng-container *ngFor="let d of devices| slice:Paging.Size*(Paging.Index-1):Paging.Size*Paging.Index">
-                    <tbody>
+                    <tbody (click)="ViewDetail(d)">
                         <ng-container *ngIf="isAdmin||isUser1">
                             <td class="settings">
                                 <button class="btn btn-warning" (click)="edit(d)"><span class="fa fa-pencil-square-o"></span></button>

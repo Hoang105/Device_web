@@ -13,6 +13,7 @@ import { ExportService } from '../../../Modules/Export.service';
 import { ProjectService } from '../../../Modules/Project.service';
 import { UserManagerService } from '../../../Modules/UserManager.service';
 import { NotificationWarningComponent } from './NotificationWarning/NotificationWarning.component';
+import { PopupDeviceComponent } from './PopupDevice/PopupDevice.component';
 
 export class Notication {
     name:string;
@@ -280,5 +281,12 @@ export class DeviceComponent extends CommonComponent<DeviceEntity> implements On
     }
     get isUser1() {
         return this.admin && this.admin.user_manager_role === 2;
+    }
+    ViewDetail(data){
+        this.modalRef = this.modalService.show(PopupDeviceComponent,  {
+            initialState: {
+            title: 'Modal title',
+            data: data
+        }});
     }
 }
